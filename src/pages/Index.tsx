@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 const Index = () => {
   const { toast } = useToast();
   const [activeFilter, setActiveFilter] = useState('Все');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -112,11 +113,74 @@ const Index = () => {
             <a href="#reviews" className="hover:text-primary transition-colors">Отзывы</a>
             <a href="#contact" className="hover:text-primary transition-colors">Контакты</a>
           </div>
-          <Button className="hidden md:block">
-            <Icon name="Phone" size={18} className="mr-2" />
-            +7 (999) 123-45-67
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button className="hidden md:flex">
+              <Icon name="Phone" size={18} className="mr-2" />
+              +7 (999) 123-45-67
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+            </Button>
+          </div>
         </nav>
+        
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t animate-fade-in">
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+              <a 
+                href="#main" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Главная
+              </a>
+              <a 
+                href="#services" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Услуги
+              </a>
+              <a 
+                href="#projects" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Проекты
+              </a>
+              <a 
+                href="#gallery" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Галерея
+              </a>
+              <a 
+                href="#reviews" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Отзывы
+              </a>
+              <a 
+                href="#contact" 
+                className="hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Контакты
+              </a>
+              <Button className="w-full">
+                <Icon name="Phone" size={18} className="mr-2" />
+                +7 (999) 123-45-67
+              </Button>
+            </div>
+          </div>
+        )}
       </header>
 
       <section id="main" className="pt-24 pb-20 bg-gradient-to-br from-accent via-accent/95 to-accent/90 text-white relative overflow-hidden">
